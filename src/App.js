@@ -71,7 +71,7 @@ class App extends React.Component {
                             <h1 style={{ color: "white", padding: "25px", fontSize: "20px" ,margin:"0 0 0 50px"}}>测试平台</h1>
                         </div>
                         <Menu onClick={this.handleClick}
-                            style={{ width: 256 }}
+                            style={{ width: 200 }}
                             defaultSelectedKeys={['1']}
                             defaultOpenKeys={['sub1']}
                             mode="inline"

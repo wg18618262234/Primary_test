@@ -35,16 +35,18 @@ export class Tools extends React.Component {
     }
     async componentDidMount() {
         const res = await getTools()
-        this.setState({
-            data: res.data.result.map(
-                (item) => item = {
-                    key: item.id,
-                    name: item.key,
-                    address: item.url
-                }
-            )
+        if (res) {
+            this.setState({
+                data: res.data.result.map(
+                    (item) => item = {
+                        key: item.id,
+                        name: item.key,
+                        address: item.url
+                    }
+                )
 
-        })
+            })
+        }
     }
     render() {
         console.log(this.props)
@@ -121,9 +123,9 @@ class EditTools extends React.Component {
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 14 }}
                     layout="horizontal"
-                    // initialValues={{ size: componentSize }}
-                    // onValuesChange={onFormLayoutChange}
-                    // size={componentSize}
+                // initialValues={{ size: componentSize }}
+                // onValuesChange={onFormLayoutChange}
+                // size={componentSize}
                 >
                     <Form.Item label="Form Size" name="size">
                         <Radio.Group>

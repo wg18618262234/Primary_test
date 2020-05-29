@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './onion_log.png';
 import {
-    // BrowserRouter as Router,
-    HashRouter as Router,
+    BrowserRouter as Router,
+    // HashRouter as Router,
     Route,
     Switch,
     Link,
@@ -67,8 +67,15 @@ class App extends React.Component {
                         <div className="logo" style={{
                             height: '80px',
                         }}>
-                            <img style={{ margin: "10px 0px 0px 10px" }} src={logo} className="App-logo" alt="logo" />
-                            <h1 style={{ color: "white", padding: "25px", fontSize: "20px" ,margin:"0 0 0 50px"}}>测试平台</h1>
+                            <img style={{
+                                margin: "10px 0px 0px 10px",
+                            }} src={logo} className="App-logo" alt="logo" />
+                            <h1 style={{
+                                color: "white",
+                                padding: "25px",
+                                fontSize: "20px",
+                                margin: "0 0 0 50px",
+                            }}>测试平台</h1>
                         </div>
                         <Menu onClick={this.handleClick}
                             style={{ width: 200 }}
@@ -99,9 +106,8 @@ class App extends React.Component {
                                     <Route path="/tools_manage">
 
                                     </Route>
-                                    <Route path="/tools_adress">
-                                        <Tools />
-                                    </Route>
+                                    <Route path="/tools_adress" component={Tools} />
+
                                     <Route path="/">
                                         <Ind />
                                     </Route>

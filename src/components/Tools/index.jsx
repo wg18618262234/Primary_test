@@ -1,5 +1,6 @@
 import React, { useState, } from 'react';
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space, Form, Input, Button, Select } from 'antd';
+import { FormInstance } from 'antd/lib/form';
 import 'antd/dist/antd.css'
 import { getTools, insertTools, deleteTools, updateTools } from './services'
 import {
@@ -12,18 +13,6 @@ import {
     useRouteMatch,
     useParams,
 } from 'react-router-dom';
-import {
-    Form,
-    Input,
-    Button,
-    Radio,
-    Select,
-    Cascader,
-    DatePicker,
-    InputNumber,
-    TreeSelect,
-    // Switch,
-} from 'antd';
 
 
 export class Tools extends React.Component {
@@ -93,96 +82,59 @@ export class Tools extends React.Component {
     }
 }
 
-class EditTools extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: []
-        }
-    }
-    async componentDidMount() {
-        const res = await getTools()
-        this.setState({
-            data: res.data.result.map(
-                (item) => item = {
-                    key: item.id,
-                    name: item.key,
-                    address: item.url
-                }
-            )
-        })
-    }
-    render() {
-        // const [componentSize, setComponentSize] = useState('small');
-        // const onFormLayoutChange = ({ size }) => {
-        //     setComponentSize(size);
-        // }
-        return (
-            <div>
-                <Form
-                    labelCol={{ span: 4 }}
-                    wrapperCol={{ span: 14 }}
-                    layout="horizontal"
-                // initialValues={{ size: componentSize }}
-                // onValuesChange={onFormLayoutChange}
-                // size={componentSize}
-                >
-                    <Form.Item label="Form Size" name="size">
-                        <Radio.Group>
-                            <Radio.Button value="small">Small</Radio.Button>
-                            <Radio.Button value="middle">Middle</Radio.Button>
-                            <Radio.Button value="large">Large</Radio.Button>
-                        </Radio.Group>
-                    </Form.Item>
-                    <Form.Item label="Input">
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="Select">
-                        <Select>
-                            <Select.Option value="demo">Demo</Select.Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item label="TreeSelect">
-                        <TreeSelect
-                            treeData={[
-                                { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-                            ]}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Cascader">
-                        <Cascader
-                            options={[
-                                {
-                                    value: 'zhejiang',
-                                    label: 'Zhejiang',
-                                    children: [
-                                        {
-                                            value: 'hangzhou',
-                                            label: 'Hangzhou',
-                                        },
-                                    ],
-                                },
-                            ]}
-                        />
-                    </Form.Item>
-                    <Form.Item label="DatePicker">
-                        <DatePicker />
-                    </Form.Item>
-                    <Form.Item label="InputNumber">
-                        <InputNumber />
-                    </Form.Item>
-                    <Form.Item label="Switch">
-                        <Switch />
-                    </Form.Item>
-                    <Form.Item label="Button">
-                        <Button>Button</Button>
-                    </Form.Item>
-                </Form>
-            </div>
-        )
 
+
+
+const { Option } = Select;
+
+const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
+const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+};
+
+class EditTools extends React.Component {
+    formRef = React.createRef();
+    onFinish = values => {
+        console.log(values);
+
+    };
+    onReset = () => {
+        this.formRef.current.resetFields();
+    };
+    onFill = () => {
+        this.formRef.current.setFieldsValue({
+            toolsName: 'Locust',
+            toolsAddress: 'url',
+        });
+    };
+    render() {
+        return (
+            <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
+                <Form.Item name="toolsName" label="工具名称" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item name="toolsAddress" label="工具地址" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit">
+                        保存
+                    </Button>
+                    <Button htmlType="button" onClick={this.onReset}>
+                        重置
+                    </Button>
+                    <Button type="link" htmlType="button" onClick={this.onFill}>
+                        默认
+                    </Button>
+                </Form.Item>
+            </Form>
+        );
     }
 }
+
 class DeleteTools extends React.Component {
     constructor(props) {
         super(props);

@@ -85,7 +85,7 @@ class App extends React.Component {
                         >
                             <Menu.Item key='sub1'><Link to='/'>首页</Link></Menu.Item>
                             <SubMenu key="sub3" icon={<AppstoreOutlined />} title="测试工具">
-                                <Menu.Item key="5"><Link to="/tools_adress">测试工具地址</Link></Menu.Item>
+                                <Menu.Item key="5"><Link to="/tools">测试工具地址</Link></Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub4" title={
                                 <span>
@@ -104,10 +104,8 @@ class App extends React.Component {
                             <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
                                 <Switch>
                                     <Route path="/tools_manage">
-
                                     </Route>
-                                    <Route path="/tools_adress" component={Tools} />
-
+                                    <Route path="/tools" component={Tools} />
                                     <Route path="/">
                                         <Ind />
                                     </Route>

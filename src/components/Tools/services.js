@@ -8,25 +8,25 @@ export async function getTools() {
         console.error(error);
     }
 }
-export async function insertTools() {
+export async function insertTools(data) {
     try {
-        const response = await axios.get('http://127.0.0.1:5000/insert_tools');
+        const response = await axios.post('http://127.0.0.1:5000/insert_tools', data);
         return response
     } catch (error) {
         console.error(error);
     }
 }
-export async function deleteTools() {
+export async function deleteTools(data) {
     try {
-        const response = await axios.get('http://127.0.0.1:5000/delete_tools');
+        const response = await axios.post('http://127.0.0.1:5000/delete_tools',data);
         return response
     } catch (error) {
         console.error(error);
     }
 }
-export async function updateTools() {
+export async function updateTools(data) {
     try {
-        const response = await axios.get('http://127.0.0.1:5000/update_tools');
+        const response = await axios.post('http://127.0.0.1:5000/update_tools', data);
         return response
     } catch (error) {
         console.error(error);

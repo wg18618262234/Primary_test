@@ -1,6 +1,5 @@
-import React, { useState, } from 'react';
-import { Table, Tag, Space, Form, Input, Button, Select, Popconfirm } from 'antd';
-import { FormInstance } from 'antd/lib/form';
+import React from 'react';
+import { Table, Space, Form, Input, Button, Popconfirm } from 'antd';
 import 'antd/dist/antd.css'
 import { getTools, insertTools, deleteTools, updateTools } from './services'
 import {
@@ -9,9 +8,6 @@ import {
     Route,
     Switch,
     Link,
-    Redirect,
-    useRouteMatch,
-    useParams,
 } from 'react-router-dom';
 
 export class Tools extends React.Component {
@@ -92,12 +88,14 @@ export class Tools extends React.Component {
                     <Route path={`${pathname}/add`} component={AddTools}>
                     </Route>
                     <Route path={`${pathname}`}>
-                        <div>
-                            <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
-                                <Link to={`${pathname}/add`}>添加</Link>
+                        <div style={{ textAlign: "right" }}>
+                            <Link to={`${pathname}/add`}>
+                                <Button type="primary" style={{ marginBottom: 16 }}>
+                                    添加
                             </Button>
-                            <Table dataSource={dataSource} columns={columns} />
+                            </Link>
                         </div>
+                        <Table dataSource={dataSource} columns={columns} />
                     </Route>
                 </Switch>
             </div>
@@ -106,10 +104,10 @@ export class Tools extends React.Component {
 }
 const layout = {
     labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    wrapperCol: { span: 8 },
 };
 const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: { offset: 8, span: 8 },
 };
 class EditTools extends React.Component {
     constructor(props) {

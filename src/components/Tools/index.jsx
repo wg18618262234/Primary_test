@@ -121,7 +121,7 @@ class EditTools extends React.Component {
         values["id"] = id
         const res = updateTools(values)
         console.log(res)
-        this.onBack()
+        this.props.onBack()
         this.props.history.goBack()
     };
     initialValues = () => (this.props.location.data ? {

@@ -18,8 +18,10 @@ export class Tools extends React.Component {
         }
     }
     async componentWillMount() {
+        console.log(this, 'tools')
         await this.toolsInit()
     }
+
     async toolsInit() {
         const res = await getTools()
         console.log(res)
@@ -83,9 +85,9 @@ export class Tools extends React.Component {
                     <Route path={`${pathname}/delete`}>
                         <DeleteTools />
                     </Route>
-                    <Route path={`${pathname}/edit/:id`} component={EditTools}>
+                    <Route path={`${pathname}/edit/:id`} render={props => <EditTools onBack={() => this.toolsInit()} {...props} />}>
                     </Route>
-                    <Route path={`${pathname}/add`} component={AddTools}>
+                    <Route path={`${pathname}/add`} render={props => <AddTools onBack={() => this.toolsInit()} {...props} />}>
                     </Route>
                     <Route path={`${pathname}`}>
                         <div style={{ textAlign: "right" }}>
@@ -119,6 +121,8 @@ class EditTools extends React.Component {
         values["id"] = id
         const res = updateTools(values)
         console.log(res)
+        this.onBack()
+        this.props.history.goBack()
     };
     initialValues = () => (this.props.location.data ? {
         toolsName: this.props.location.data.name,
@@ -154,12 +158,13 @@ class AddTools extends React.Component {
         }
     }
     formRef = React.createRef();
-    onFinish = values => {
+    onFinish = async values => {
         this.setState(
             { 'values': values }
         )
-        const res = insertTools(this.state.values)
-        console.log(res)
+        const res = await insertTools(this.state.values)
+        this.props.onBack()
+        this.props.history.goBack()
     };
     render() {
         return (

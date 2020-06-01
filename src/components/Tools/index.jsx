@@ -9,7 +9,7 @@ import {
     Switch,
     Link,
 } from 'react-router-dom';
-import { openNotificationWithIcon } from '../notification'
+import { openNotificationWithIcon } from '../Notification'
 
 export class Tools extends React.Component {
     constructor(props) {
@@ -22,7 +22,9 @@ export class Tools extends React.Component {
         console.log(this, 'tools')
         await this.toolsInit()
     }
-
+    componentDidMount() {
+        document.title = '工具地址'
+    }
     async toolsInit() {
         const res = await getTools()
         console.log(res)

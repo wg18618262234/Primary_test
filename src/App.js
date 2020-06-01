@@ -103,19 +103,11 @@ class App extends React.Component {
                         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
                             <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
                                 <Switch>
-                                    <Route path="/tools_manage">
+                                    <Route exact path="/tools_manage" />
+                                    <Route exact path="/tools" component={Tools} />
+                                    <Route exact path="/">
+                                        <Ind  />
                                     </Route>
-                                    <Route path="/tools" component={Tools} />
-                                    <Route path="/">
-                                        <Ind />
-                                    </Route>
-                                    {/* <Redirect to="/" /> */}
-                                    {/* 
-                                    Redirect 重定向 
-                                    @param {string} from 当输入制定链接时会触发
-                                    @param {string} to 当触发时跳转到哪里
-                                    配合Switch 当输入无效路径时会跳到指定页面
-                                    */}
                                 </Switch>
                             </div>
                         </Content>

@@ -103,10 +103,10 @@ class App extends React.Component {
                         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
                             <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
                                 <Switch>
-                                    <Route exact path="/tools_manage" />
-                                    <Route exact path="/tools" component={Tools} />
-                                    <Route exact path="/">
-                                        <Ind  />
+                                    <Route path="/tools_manage" />
+                                    <Route path="/tools" component={Tools} />
+                                    <Route path="/">
+                                        <Ind />
                                     </Route>
                                 </Switch>
                             </div>

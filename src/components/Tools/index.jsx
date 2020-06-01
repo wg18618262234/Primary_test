@@ -18,11 +18,9 @@ export class Tools extends React.Component {
             data: []
         }
     }
-    async componentWillMount() {
-        console.log(this, 'tools')
+    async componentDidMount() {
+        console.log(this, '2')
         await this.toolsInit()
-    }
-    componentDidMount() {
         document.title = '工具地址'
     }
     async toolsInit() {
@@ -117,10 +115,10 @@ class EditTools extends React.Component {
         super(props);
     }
     formRef = React.createRef();
-    onFinish = values => {
+    onFinish = async values => {
         const id = this.props.match.params.id
         values["id"] = id
-        const res = updateTools(values)
+        const res = await updateTools(values)
         console.log(res)
         this.props.onBack()
         this.props.history.goBack()

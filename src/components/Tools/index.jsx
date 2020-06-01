@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Space, Form, Input, Button, Popconfirm } from 'antd';
+import { Table, Space, Form, Input, Button, Popconfirm, Alert } from 'antd';
 import 'antd/dist/antd.css'
 import { getTools, insertTools, deleteTools, updateTools } from './services'
 import {
@@ -9,6 +9,7 @@ import {
     Switch,
     Link,
 } from 'react-router-dom';
+import { openNotificationWithIcon } from '../notification'
 
 export class Tools extends React.Component {
     constructor(props) {
@@ -42,6 +43,7 @@ export class Tools extends React.Component {
         const res = await deleteTools(data)
         console.log(res)
         await this.toolsInit()
+        openNotificationWithIcon('success', '删除成功')
     }
     render() {
         const pathname = this.props.match.path
@@ -82,9 +84,6 @@ export class Tools extends React.Component {
         return (
             <div>
                 <Switch>
-                    <Route path={`${pathname}/delete`}>
-                        <DeleteTools />
-                    </Route>
                     <Route path={`${pathname}/edit/:id`} render={props => <EditTools onBack={() => this.toolsInit()} {...props} />}>
                     </Route>
                     <Route path={`${pathname}/add`} render={props => <AddTools onBack={() => this.toolsInit()} {...props} />}>
@@ -94,7 +93,7 @@ export class Tools extends React.Component {
                             <Link to={`${pathname}/add`}>
                                 <Button type="primary" style={{ marginBottom: 16 }}>
                                     添加
-                            </Button>
+                                </Button>
                             </Link>
                         </div>
                         <Table dataSource={dataSource} columns={columns} />
@@ -123,6 +122,7 @@ class EditTools extends React.Component {
         console.log(res)
         this.props.onBack()
         this.props.history.goBack()
+        openNotificationWithIcon('success', '保存成功')
     };
     initialValues = () => (this.props.location.data ? {
         toolsName: this.props.location.data.name,
@@ -165,6 +165,7 @@ class AddTools extends React.Component {
         const res = await insertTools(this.state.values)
         this.props.onBack()
         this.props.history.goBack()
+        openNotificationWithIcon('success', '保存成功')
     };
     render() {
         return (
@@ -182,33 +183,5 @@ class AddTools extends React.Component {
                 </Form.Item>
             </Form>
         );
-    }
-}
-class DeleteTools extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: []
-        }
-    }
-    async componentDidMount() {
-        const res = await getTools()
-        this.setState({
-            data: res.data.result.map(
-                (item) => item = {
-                    key: item.id,
-                    name: item.key,
-                    address: item.url
-                }
-            )
-
-        })
-    }
-    render() {
-        return (
-            <div>
-                <h1>删除</h1>
-            </div>
-        )
     }
 }

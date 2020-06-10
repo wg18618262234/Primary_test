@@ -1,5 +1,5 @@
 import axios from 'axios'
-const path = 'http://192.168.31.174:5000'
+const path = 'http://primary-tools-admin.gh.test'
 
 export async function getTools() {
     try {

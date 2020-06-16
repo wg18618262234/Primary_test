@@ -1,10 +1,8 @@
 import React from 'react';
-import { Table, Space, Form, Input, Button, Popconfirm, Alert } from 'antd';
+import { Table, Space, Form, Input, Button, Popconfirm } from 'antd';
 import 'antd/dist/antd.css'
 import { getTools, insertTools, deleteTools, updateTools } from './services'
 import {
-    // BrowserRouter as Router,
-    HashRouter as Router,
     Route,
     Switch,
     Link,

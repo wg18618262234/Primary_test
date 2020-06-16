@@ -6,27 +6,16 @@ import {
     Route,
     Switch,
     Link,
-    Redirect,
-    useRouteMatch,
-    useParams
 } from 'react-router-dom';
 import './App.css';
-import { Tools, Ind } from './components';
+import { Tools, Ind, Request_api } from './components';
 import { Layout, Menu } from 'antd';
 import {
     AppstoreOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    ShopOutlined,
-    TeamOutlined,
-    UserOutlined,
-    UploadOutlined,
-    VideoCameraOutlined,
-    MailOutlined,
     SettingOutlined,
 } from '@ant-design/icons';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 class App extends React.Component {
@@ -86,6 +75,7 @@ class App extends React.Component {
                             <Menu.Item key='sub1'><Link to='/'>首页</Link></Menu.Item>
                             <SubMenu key="sub3" icon={<AppstoreOutlined />} title="测试工具">
                                 <Menu.Item key="5"><Link to="/tools">测试工具地址</Link></Menu.Item>
+                                <Menu.Item key="6"><Link to="/request_api">批量接口请求</Link></Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub4" title={
                                 <span>
@@ -103,6 +93,7 @@ class App extends React.Component {
                         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
                             <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
                                 <Switch>
+                                    <Route path="/request_api" component={Request_api} />
                                     <Route path="/tools_manage" />
                                     <Route path="/tools" component={Tools} />
                                     <Route path="/">
